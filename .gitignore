@@ -39,3 +39,15 @@
 
 # debug information files
 *.dwo
+# IDEs
+.idea/
+.vscode/
+
+# OS
+.DS_Store
+
+# PlatformIO
+.pio/
+
+# Python
+.venv/
