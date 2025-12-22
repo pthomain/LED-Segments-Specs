@@ -18,52 +18,53 @@
  * along with LED Segments. If not, see <https://www.gnu.org/licenses/>.
  */
 
-#ifndef LED_SEGMENTS_PHRASESPEC_H
-#define LED_SEGMENTS_PHRASESPEC_H
-#include "eorder.h"
-#include"engine/utils/Utils.h"
+#ifndef POLARSPEC_H
+#define POLARSPEC_H
 
-#if DEBUG
-#include "config/TestPhraseConfig.h"
-#else
-#include "phrase/config/DlhPhraseConfig.h"
-#endif
-
-#include "config/PhraseEffectConfig.h"
-#include "config/PhraseOverlayConfig.h"
-#include "config/PhraseParamConfig.h"
-#include "config/PhraseTransitionConfig.h"
+#include "config/PolarEffectConfig.h"
+#include "config/PolarLayoutConfig.h"
+#include "config/PolarOverlayConfig.h"
+#include "config/PolarParamConfig.h"
+#include "config/PolarTransitionConfig.h"
 #include "engine/displayspec/DisplaySpec.h"
-#include "config/PhraseLayoutConfig.h"
+#include "engine/utils/Utils.h"
+#include <functional> // Add this include
+#include <utility>    // For std::pair
 
-class PhraseSpec : public DisplaySpec {
-public :
+using namespace LEDSegments;
+
+class PolarSpec : public DisplaySpec {
+public:
     static constexpr int LED_PIN = 9;
     static constexpr EOrder RGB_ORDER = GRB;
 
-    explicit PhraseSpec(): DisplaySpec(
+    explicit PolarSpec() : DisplaySpec(
         LayoutConfig(
-            phraseLayouts,
-            phraseLayoutNames,
-            phraseLayoutSelector,
-            phraseEffectSelector,
-            phraseOverlaySelector,
-            phraseTransitionSelector,
-            phraseParamSelector
+            polarLayoutIds,
+            polarLayoutNames,
+            polarLayoutSelector,
+            polarEffectSelector,
+            polarOverlaySelector,
+            polarTransitionSelector,
+            polarParamSelector
         ),
-        DEBUG ? 50 : 192,
-        DEBUG ? 3 : 5,
-        DEBUG ? 3 : 10,
+        DEBUG ? 40 : 128,
+        DEBUG ? 3600 : 3,
+        DEBUG ? 3600 : 8,
         1000,
-        1.0f
+        1.0f,
+        30,
+        true
     ) {
     }
 
-    uint16_t nbLeds() const override { return NB_LEDS; }
+    uint16_t nbLeds() const override { return 241; }
 
     uint16_t nbSegments(uint16_t layoutId) const override;
 
     uint16_t segmentSize(uint16_t layoutId, uint16_t segmentIndex) const override;
+
+    void toPolarCoords(uint16_t pixelIndex, PolarContext& context) const override;
 
     void mapLeds(
         uint16_t layoutId,
@@ -73,7 +74,7 @@ public :
         const std::function<void(uint16_t)> &onLedMapped
     ) const override;
 
-    ~PhraseSpec() override = default;
+    ~PolarSpec() override = default;
 };
 
-#endif //LED_SEGMENTS_PHRASESPEC_H
+#endif //POLARSPEC_H

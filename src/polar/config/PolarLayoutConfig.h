@@ -18,22 +18,32 @@
  * along with LED Segments. If not, see <https://www.gnu.org/licenses/>.
  */
 
-#include "Arduino.h"
-#include <LED-Segments.h>
-#include "polar/PolarSpec.h"
+#ifndef POLAR_LAYOUT_CONFIG_H
+#define POLAR_LAYOUT_CONFIG_H
+
+#include "engine/displayspec/config/LayoutConfig.h"
 
 using namespace LEDSegments;
-using SPEC = PolarSpec;
 
-Display<SPEC> *display;
+enum PolarLayout {
+    WHOLE,
+    SEGMENTED
+};
 
-void setup() {
-    Serial.begin(115200);
-    delay(2000);
+static const std::set<uint16_t> polarLayoutIds = {
+    {WHOLE, SEGMENTED}
+};
 
-    display = new Display<SPEC>();
+static const std::map<uint16_t, String> polarLayoutNames = {
+    {WHOLE, "WHOLE"},
+    {SEGMENTED, "SEGMENTED"}
+};
+
+static WeightedLayouts polarLayoutSelector(RenderableType type) {
+    return {
+        {WHOLE, 1},
+        {SEGMENTED, 0}
+    };
 }
 
-void loop() {
-    display->loop();
-}
+#endif //POLAR_LAYOUT_CONFIG_H

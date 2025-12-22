@@ -18,22 +18,22 @@
  * along with LED Segments. If not, see <https://www.gnu.org/licenses/>.
  */
 
-#include "Arduino.h"
-#include <LED-Segments.h>
-#include "polar/PolarSpec.h"
+#ifndef POLAR_OVERLAY_CONFIG_H
+#define POLAR_OVERLAY_CONFIG_H
+
+#include "crgb.h"
+#include "overlays/none/NoOverlay.h"
+#include "engine/displayspec/config/LayoutConfig.h"
 
 using namespace LEDSegments;
-using SPEC = PolarSpec;
 
-Display<SPEC> *display;
-
-void setup() {
-    Serial.begin(115200);
-    delay(2000);
-
-    display = new Display<SPEC>();
+static RenderablesAndMirrors<CRGB> polarOverlaySelector(uint16_t layoutId) {
+    return {
+        {
+            {NoOverlay::factory, 1},
+        },
+        noMirrors<CRGB>
+    };
 }
 
-void loop() {
-    display->loop();
-}
+#endif //POLAR_OVERLAY_CONFIG_H

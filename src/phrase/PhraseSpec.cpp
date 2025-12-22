@@ -81,7 +81,7 @@ void PhraseSpec::mapLeds(
     const std::function<void(uint16_t)> &onLedMapped
 ) const {
     auto mapLed = [&](uint16_t ledIndex){
-        IS_DEBUG ? mapLedInSnakeDisplay(ledIndex, onLedMapped) : onLedMapped(ledIndex);
+        DEBUG ? mapLedInSnakeDisplay(ledIndex, onLedMapped) : onLedMapped(ledIndex);
     };
 
     auto mapRange = [&](uint16_t start, uint16_t end) {
