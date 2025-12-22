@@ -18,22 +18,19 @@
  * along with LED Segments. If not, see <https://www.gnu.org/licenses/>.
  */
 
-#include "Arduino.h"
-#include <LED-Segments.h>
-#include "polar/PolarSpec.h"
+#ifndef POLAR_TRANSITION_CONFIG_H
+#define POLAR_TRANSITION_CONFIG_H
+
+#include "engine/displayspec/config/LayoutConfig.h"
+#include "transitions/fade/FadeTransition.h"
 
 using namespace LEDSegments;
-using SPEC = PolarSpec;
 
-Display<SPEC> *display;
-
-void setup() {
-    Serial.begin(115200);
-    delay(2000);
-
-    display = new Display<SPEC>();
+static RenderablesAndMirrors<uint8_t> polarTransitionSelector(uint16_t layoutId) {
+    return {
+        just(FadeTransition::factory),
+        noMirrors<uint8_t>
+    };
 }
 
-void loop() {
-    display->loop();
-}
+#endif //POLAR_TRANSITION_CONFIG_H

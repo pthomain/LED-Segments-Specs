@@ -33,7 +33,7 @@ class HatSpec : public DisplaySpec {
     static const std::vector<uint8_t> &eyeSegment(uint16_t layoutId, uint16_t pixelIndex);
 
 public:
-    static constexpr int LED_PIN = 5; //IS_DEBUG ? 9 : 5;
+    static constexpr int LED_PIN = 5; //DEBUG ? 9 : 5;
     static constexpr EOrder RGB_ORDER = GRB;
 
     explicit HatSpec()
@@ -48,8 +48,8 @@ public:
                 hatParamSelector
             ),
             255,
-            IS_DEBUG ? 10 : 3,
-            IS_DEBUG ? 10 : 8,
+            DEBUG ? 10 : 3,
+            DEBUG ? 10 : 8,
             1000,
             0.75f
         ) {

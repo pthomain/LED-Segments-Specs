@@ -18,22 +18,18 @@
  * along with LED Segments. If not, see <https://www.gnu.org/licenses/>.
  */
 
-#include "Arduino.h"
-#include <LED-Segments.h>
-#include "polar/PolarSpec.h"
+#ifndef POLAR_PARAM_CONFIG_H
+#define POLAR_PARAM_CONFIG_H
 
 using namespace LEDSegments;
-using SPEC = PolarSpec;
 
-Display<SPEC> *display;
-
-void setup() {
-    Serial.begin(115200);
-    delay(2000);
-
-    display = new Display<SPEC>();
+static std::map<uint8_t, uint16_t> polarParamSelector(
+    RenderableType type,
+    TypeInfo::ID renderableId,
+    uint16_t layoutId,
+    Mirror mirror
+) {
+    return {};
 }
 
-void loop() {
-    display->loop();
-}
+#endif //POLAR_PARAM_CONFIG_H

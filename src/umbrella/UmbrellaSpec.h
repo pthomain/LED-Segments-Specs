@@ -47,9 +47,9 @@ public:
             umbrellaTransitionSelector,
             umbrellaParamSelector
         ),
-        IS_DEBUG ? 50 : 128,
-        IS_DEBUG ? 10 : 3,
-        IS_DEBUG ? 10 : 8,
+        DEBUG ? 50 : 128,
+        DEBUG ? 10 : 3,
+        DEBUG ? 10 : 8,
         1000,
         0.5f
     ) {
