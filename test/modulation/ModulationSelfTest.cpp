@@ -21,7 +21,7 @@
 #ifndef ARDUINO
 #include <iostream>
 #include <vector>
-#include "polar/pipeline/signals/Modulation.h"
+#include "polar/pipeline/signals/modulators/ScalarModulators.h"
 
 // Mock FastLED functions if not available in host build
 #include <cmath>
