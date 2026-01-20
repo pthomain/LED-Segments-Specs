@@ -23,9 +23,10 @@
 
 #include "engine/render/renderable/BaseRenderableFactory.h"
 #include "engine/render/renderable/TypedRenderable.h"
-#include "polar/pipeline/utils/Units.h"
-#include "polar/pipeline/PolarPipelineBuilder.h"
-#include "polar/pipeline/utils/Units.h"
+#include "renderer/pipeline/PolarPipeline.h"
+#include "renderer/pipeline/transforms/base/Layers.h"
+
+using namespace PolarShader;
 
 namespace LEDSegments {
     /**

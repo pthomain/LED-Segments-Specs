@@ -22,15 +22,11 @@
 #define POLARSPEC_H
 
 #include "config/PolarEffectConfig.h"
-#include "config/PolarLayoutConfig.h"
-#include "config/PolarOverlayConfig.h"
-#include "config/PolarParamConfig.h"
-#include "config/PolarTransitionConfig.h"
 #include "engine/displayspec/DisplaySpec.h"
 #include "engine/utils/Utils.h"
 #include <functional>
 #include "engine/render/renderable/Polar.h"
-#include "polar/pipeline/utils/Units.h"
+#include "renderer/pipeline/utils/Units.h"
 
 using namespace LEDSegments;
 

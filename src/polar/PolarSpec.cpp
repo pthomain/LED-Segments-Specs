@@ -20,9 +20,11 @@
 
 #include "PolarSpec.h"
 #include "config/PolarLayoutConfig.h"
-#include "polar/pipeline/utils/MathUtils.h"
-#include "polar/pipeline/utils/StrongTypeTests.h"
 #include <Arduino.h>
+#include "config/PolarOverlayConfig.h"
+#include "config/PolarTransitionConfig.h"
+#include "config/PolarParamConfig.h"
+#include "renderer/pipeline/utils/MathUtils.h"
 
 PolarSpec::PolarSpec() : DisplaySpec(
     LayoutConfig(
@@ -41,11 +43,6 @@ PolarSpec::PolarSpec() : DisplaySpec(
     1.0f,
     30
 ) {
-#ifdef LED_SEGMENTS_UNIT_TEST
-    bool ok = LEDSegments::UnitsTest::runStrongTypeTests();
-    Serial.print("Strong type tests: ");
-    Serial.println(ok ? "PASS" : "FAIL");
-#endif
 }
 
 uint16_t PolarSpec::nbSegments(uint16_t layoutId) const {
@@ -119,5 +116,5 @@ PolarCoords PolarSpec::toPolarCoords(uint16_t pixelIndex) const {
     }
 
     // This should not be reached if pixelIndex is valid.
-    return {0, static_cast<FracQ0_16>(0)};
+    return {0, static_cast<PolarShader::FracQ0_16>(0)};
 }

@@ -18,9 +18,11 @@
  * along with LED Segments. If not, see <https://www.gnu.org/licenses/>.
  */
 
-#include "polar/pipeline/utils/PolarUtils.h"
 #include "PolarEffect.h"
-#include "polar/pipeline/presets/Presets.h"
+#include "renderer/pipeline/presets/Presets.h"
+#include "renderer/pipeline/utils/PolarUtils.h"
+
+using namespace PolarShader;
 
 namespace LEDSegments {
     static const PolarEffectFactory factoryInstance;
@@ -29,7 +31,7 @@ namespace LEDSegments {
     PolarEffect::PolarEffect(
         const RenderableContext &context
     ) : Effect(context),
-        pipeline(buildDefaultPreset(context.palette.palette)),
+        pipeline(PolarShader::buildDefaultPreset(context.palette.palette)),
         colourLayer(pipeline.build()) {
         //PresetPicker::pickRandom(context.palette.palette)) {
     }
