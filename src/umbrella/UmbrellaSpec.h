@@ -33,9 +33,17 @@
 // other consumers (e.g. WASM/Emscripten builds driven through the fastled
 // CLI) don't pass it. The DisplaySpec ctor calls below use `DEBUG` as a
 // value (not as `#ifdef DEBUG`), so an undefined macro is a compile error
-// rather than a silent "off". Default to non-debug if no build flag set it.
-#ifndef DEBUG
-#define DEBUG 0
+// rather than a silent "off".
+//
+// Read DEBUG (if any) into a private LV_UMBRELLA_DEBUG macro for the
+// ternary calls below. We deliberately don't `#define DEBUG 0` here:
+// LED-Segments engine code uses `#ifdef DEBUG` to gate Serial.println
+// calls that don't compile against fl::string on WASM, and defining
+// DEBUG to *anything* (including 0) would enable those branches.
+#if defined(DEBUG)
+#define LV_UMBRELLA_DEBUG DEBUG
+#else
+#define LV_UMBRELLA_DEBUG 0
 #endif
 
 constexpr uint8_t NB_SPOKES = 8;
@@ -56,9 +64,9 @@ public:
             umbrellaTransitionSelector,
             umbrellaParamSelector
         ),
-        DEBUG ? 50 : 128,
-        DEBUG ? 10 : 3,
-        DEBUG ? 10 : 8,
+        LV_UMBRELLA_DEBUG ? 50 : 128,
+        LV_UMBRELLA_DEBUG ? 10 : 3,
+        LV_UMBRELLA_DEBUG ? 10 : 8,
         1000,
         0.5f
     ) {
