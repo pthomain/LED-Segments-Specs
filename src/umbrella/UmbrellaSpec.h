@@ -29,6 +29,15 @@
 #include "engine/displayspec/DisplaySpec.h"
 #include "engine/utils/Utils.h"
 
+// `DEBUG` is set to 0/1 via PlatformIO build flags on hardware targets, but
+// other consumers (e.g. WASM/Emscripten builds driven through the fastled
+// CLI) don't pass it. The DisplaySpec ctor calls below use `DEBUG` as a
+// value (not as `#ifdef DEBUG`), so an undefined macro is a compile error
+// rather than a silent "off". Default to non-debug if no build flag set it.
+#ifndef DEBUG
+#define DEBUG 0
+#endif
+
 constexpr uint8_t NB_SPOKES = 8;
 constexpr uint8_t LEDS_PER_SPOKE = 42;
 
